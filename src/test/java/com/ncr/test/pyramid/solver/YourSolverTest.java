@@ -26,6 +26,15 @@ public class YourSolverTest {
             { 23,   0,  0,  0 }
     };
 
+    private static final int[][] MAX_SIZE_AT_LEAST_7 = {
+            { 23,  1,  2,  1,  32,  1 },
+            {  1,  2,  1,  3,  30,  0 },
+            {  3,  2,  5,  1,   0,  0 },
+            { 25,  1,  2,  0,   0,  0 },
+            { 15,  3,  0,  0,   0,  0 },
+            {  7,  0,  0,  0,   0,  0 }
+    };
+
     protected PyramidSolver solver;
 
     @Before
@@ -43,6 +52,14 @@ public class YourSolverTest {
     public void solverHandlesDemoData() {
         Pyramid pyramid = new Pyramid(DEMO_DATA);
         assertEquals("Max path in Demo pyramid", 353, solver.pyramidMaximumTotal(pyramid));
+    }
+
+    @Test
+    public void maxSizeAtLeast7() {
+        // We need at least 7 sub-paths to be considered at each row
+        // to ensure that the solver works correctly with the provided data.
+        Pyramid pyramid = new Pyramid(MAX_SIZE_AT_LEAST_7);
+        assertEquals("Max path in MAX_SIZE >= 7 pyramid", 75, solver.pyramidMaximumTotal(pyramid));
     }
 
     @Test

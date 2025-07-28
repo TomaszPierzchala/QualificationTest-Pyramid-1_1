@@ -17,7 +17,7 @@ public class YourSolver implements PyramidSolver {
 
     @Override
     public long pyramidMaximumTotal(Pyramid pyramid) {
-    	long MAX_SIZE=7L; // the maximum number of sub-paths to be considered at each row
+    	long MAX_SIZE=4100L; // the maximum number of sub-paths to be considered at each row
     	
         // we start from the bottom of the pyramid, so we need to know the first row and colum
     	int ZERO_COLUMN = 0, FIRST_ROW = pyramid.getRows()-1;

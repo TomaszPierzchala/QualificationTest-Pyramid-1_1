@@ -35,6 +35,22 @@ public class YourSolverTest {
             {  7,  0,  0,  0,   0,  0 }
     };
 
+    private static final int SIZE = 14; // the SIZE of the pyramid in the test below
+    private static final int[][] BIG_DATA = new int[SIZE][];
+    static {
+        // Create a semi-uniform pyramid with 1s and increasing values in the first row
+        for(int i = SIZE-1; i > 0; i--) {
+            BIG_DATA[i] = new int[SIZE];
+            for (int j = 0; j < SIZE; j++) {
+                BIG_DATA[i][j] = 1;
+            }
+        }
+        BIG_DATA[0] = new int[SIZE];
+        for(int j = 0; j < SIZE; j++) {    
+            BIG_DATA[0][j] = j + 1;
+        }
+    }
+
     protected PyramidSolver solver;
 
     @Before
@@ -60,6 +76,17 @@ public class YourSolverTest {
         // to ensure that the solver works correctly with the provided data.
         Pyramid pyramid = new Pyramid(MAX_SIZE_AT_LEAST_7);
         assertEquals("Max path in MAX_SIZE >= 7 pyramid", 75, solver.pyramidMaximumTotal(pyramid));
+    }
+
+    @Test
+    public void BigSemiUniformDataTest() {
+        // in this test the Pyramid is quite big - 14 rows.
+        // moreover is almost uniform (only the last row contains the difference),
+        // so any max value search algorithm should keep many, if not all sub-paths
+        // Here we have 2^14 = 16,384 sub-paths different paths and MAX_SIZE needs to be at least ~4100 
+        Pyramid pyramid = new Pyramid(BIG_DATA);
+        System.out.println(pyramid);
+        assertEquals("Max path in MAX_SIZE ofis too small", 27, solver.pyramidMaximumTotal(pyramid));
     }
 
     @Test
